@@ -1,70 +1,51 @@
-# Signal Android
+# Better Signal
 
-Signal is a simple, powerful, and secure messenger that uses your phone's data connection (WiFi/4G/5G) to communicate securely.
+An **unofficial** fork of [Signal Android](https://github.com/signalapp/Signal-Android) with extra chat UI animations and polish. It is not affiliated with or endorsed by Signal Messenger, LLC.
 
-Millions of people use Signal every day for free and instantaneous communication anywhere in the world. Send and receive high-fidelity messages, participate in HD voice/video calls, and explore a growing set of new features that help you stay connected. 
+- **Based on:** Signal Android **8.28.3** (upstream commit `7b67f2b3ee`)
+- **Latest release:** [v8.28.3-better.1](https://github.com/IM-TECHNO/better-signal/releases/latest)
 
-Signal’s advanced privacy-preserving technology is always enabled, so you can focus on sharing the moments that matter with the people who matter to you.
+Release tags follow `v<upstream version>-better.<n>`, so `v8.28.3-better.1` is the first Better Signal release built on Signal Android 8.28.3.
 
-Currently available on the [Play Store](https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms) and [signal.org](https://signal.org/android/apk/).
+## What is different from upstream
 
-<a href='https://play.google.com/store/apps/details?id=org.thoughtcrime.securesms&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='80px'/></a>
+- Balloon pop-in for sent and received messages, and pop-out when a message is deleted
+- Smoother fade and scale transition when opening a chat from the list
+- The round scroll-to-bottom button is replaced by a pill above the compose bar that shows the unread count or "Scroll to the bottom"
+- Pop animation for the unread badge on the mention button
+- Shimmer over attachment thumbnails while they download
 
-Also available on [iOS](https://github.com/signalapp/signal-ios) and [Desktop](https://github.com/signalapp/signal-desktop).
+Everything else is upstream Signal Android unchanged.
 
-## Contributing Bug Reports
-We use GitHub for bug tracking. Please search the existing issues for your bug and create a new one if the issue is not yet tracked!
+## Try it
 
-https://github.com/signalapp/Signal-Android/issues
+Download an APK from the [Releases page](https://github.com/IM-TECHNO/better-signal/releases):
 
-## Joining the Beta
-Want to live life on the bleeding edge and help out with testing?
+- `arm64-v8a`: for almost all modern phones (recommended)
+- `universal`: works on any device, but is larger
 
-You can subscribe to Signal Android Beta releases here:
-https://play.google.com/apps/testing/org.thoughtcrime.securesms
+Verify the download against `SHA256SUMS.txt` on the release page.
 
-If you're interested in a life of peace and tranquility, stick with the standard releases.
+**Before installing:**
 
-## Contributing Translations
-Interested in helping translate Signal? Contribute here:
+- This build has had no independent security review. Use it at your own risk.
+- It uses the same app ID as the official Signal app, so it cannot be installed over it. You must uninstall Signal first, which deletes local chat history unless you have a backup. Do not do this on a device you rely on without one.
+- Updates between Better Signal releases work, because they are signed with the same key.
 
-https://community.signalusers.org/c/translation-feedback/
+## Building
 
-## Contributing Code
+This is a standard Signal Android build. You need JDK 21 and the Android SDK (see `.tool-versions` and `gradle/libs.versions.toml` for versions). Then:
 
-If you're new to the Signal codebase, we recommend going through our issues and picking out a simple bug to fix in order to get yourself familiar. Also please have a look at the [CONTRIBUTING.md](https://github.com/signalapp/Signal-Android/blob/main/CONTRIBUTING.md), that might answer some of your questions.
+```
+./gradlew :Signal-Android:assemblePlayProdDebug
+```
 
-For larger changes and feature ideas, we ask that you propose it on the [unofficial Community Forum](https://community.signalusers.org) for a high-level discussion with the wider community before implementation.
+The debug APK is written to `app/build/outputs/apk/playProd/debug/`. For the build used in releases, run `assembleGithubProdRelease` and sign the result yourself.
 
-## Contributing Ideas
-Have something you want to say about Signal projects or want to be part of the conversation? Get involved in the [community forum](https://community.signalusers.org).
+## Upstream and license
 
-Help
-====
-## Support
-For troubleshooting and questions, please visit our support center!
+All credit for Signal goes to Signal Messenger, LLC and its contributors. For the official app, bug reports, translations, and full commit history, see https://github.com/signalapp/Signal-Android and https://signal.org.
 
-https://support.signal.org/
+This repository does not include upstream commit history. It starts from a snapshot of upstream because GitHub push protection blocks old OpenSSL test keys in that history.
 
-## Documentation
-Looking for documentation? Check out the wiki!
-
-https://github.com/signalapp/Signal-Android/wiki
-
-# Legal things
-## Cryptography Notice
-
-This distribution includes cryptographic software. The country in which you currently reside may have restrictions on the import, possession, use, and/or re-export to another country, of encryption software.
-BEFORE using any encryption software, please check your country's laws, regulations and policies concerning the import, possession, or use, and re-export of encryption software, to see if this is permitted.
-See <http://www.wassenaar.org/> for more information.
-
-The U.S. Government Department of Commerce, Bureau of Industry and Security (BIS), has classified this software as Export Commodity Control Number (ECCN) 5D002.C.1, which includes information security software using or performing cryptographic functions with asymmetric algorithms.
-The form and manner of this distribution makes it eligible for export under the License Exception ENC Technology Software Unrestricted (TSU) exception (see the BIS Export Administration Regulations, Section 740.13) for both object code and source code.
-
-## License
-
-Copyright 2013 Signal Messenger, LLC
-
-Licensed under the GNU AGPLv3: https://www.gnu.org/licenses/agpl-3.0.html
-
-Google Play and the Google Play logo are trademarks of Google LLC.
+Licensed under the [AGPLv3](LICENSE), the same as upstream. See also `NOTICE`.
